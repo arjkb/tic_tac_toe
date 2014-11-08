@@ -57,6 +57,14 @@ public class tictac extends Applet	{
 
 	}
 
+	public void drawC(Graphics g, int xx, int yy)	{
+		if( xx == 0 && yy == 0 )	
+			return;
+
+		g.drawOval( xx, yy, ptov(0.23, dim.width), ptov(0.23, dim.height) );
+
+	}
+
 	public void hit(int xx, int yy)	{	//if a mouse is clicked from a particular square...
 		//xx - x co-ordinate of clicked point
 		//yy - y co-ordinate of clicked point
@@ -152,7 +160,8 @@ public class tictac extends Applet	{
 					dy = ptov(0.68, dim.height);
 					break;
 		}
-		drawX(g, dx, dy);
+//		drawX(g, dx, dy);
+		drawC(g, dx, dy);
 	}
 
 	public void paint(Graphics g)	{
