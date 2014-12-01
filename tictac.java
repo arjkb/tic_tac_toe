@@ -67,7 +67,7 @@ public class tictac extends Applet	{
 		if( xx == 0 && yy == 0 )	
 			return;
 
-		g.fillOval( xx, yy, ptov(0.23, dim.width), ptov(0.23, dim.height) );
+		g.drawOval( xx, yy, ptov(0.23, dim.width), ptov(0.23, dim.height) );
 
 	}
 
@@ -127,6 +127,11 @@ public class tictac extends Applet	{
 			}
 		}			
 	}
+	
+	public void  playOpp()	{
+		A[1][1] = 2; //this is a trial move
+		
+	}
 
 	public void update(Graphics g)	{
 		/*
@@ -156,37 +161,8 @@ public class tictac extends Applet	{
 
 
 		int dx = 0, dy = 0;
-/*
-		switch(lasthit)	{ //resolve x and y co-ordinates of a particular square
-			case 1: dx = ptov(0.09, dim.width);
-					dy = ptov(0.09, dim.height);
-					break;
-			case 2: dx = ptov(0.38, dim.width);
-					dy = ptov(0.09, dim.height);
-					break;
-			case 3: dx = ptov(0.68, dim.width);
-					dy = ptov(0.09, dim.height);
-					break;
-			case 4: dx = ptov(0.09, dim.width);
-					dy = ptov(0.38, dim.height);
-					break;
-			case 5: dx = ptov(0.38, dim.width);
-					dy = ptov(0.38, dim.height);
-					break;
-			case 6: dx = ptov(0.68, dim.width);
-					dy = ptov(0.38, dim.height);
-					break;
-			case 7: dx = ptov(0.09, dim.width);
-					dy = ptov(0.68, dim.height);
-					break;
-			case 8: dx = ptov(0.38, dim.width);
-					dy = ptov(0.68, dim.height);
-					break;
-			case 9: dx = ptov(0.68, dim.width);
-					dy = ptov(0.68, dim.height);
-					break;
-		}
-*/
+		
+		/* DRAW X */
 		if(A[0][0] == 1)	{
 			dx = ptov(0.09, dim.width);
 			dy = ptov(0.09, dim.height);
@@ -232,6 +208,53 @@ public class tictac extends Applet	{
 			dy = ptov(0.68, dim.height);
 			drawX(g, dx, dy);
 		}
+		
+		/* DRAW CIRCLES */
+		if(A[0][0] == 2)	{
+			dx = ptov(0.09, dim.width);
+			dy = ptov(0.09, dim.height);
+			drawC(g, dx, dy);
+		}
+		if(A[0][1] == 2)	{
+			dx = ptov(0.38, dim.width);
+			dy = ptov(0.09, dim.height);
+			drawC(g, dx, dy);
+		}
+		if(A[0][2] == 2)	{
+			dx = ptov(0.68, dim.width);
+			dy = ptov(0.09, dim.height);
+			drawC(g, dx, dy);
+		}
+		if(A[1][0] == 2)	{
+			dx = ptov(0.09, dim.width);
+			dy = ptov(0.38, dim.height);
+			drawC(g, dx, dy);
+		}
+		if(A[1][1] == 2)	{
+			dx = ptov(0.38, dim.width);
+			dy = ptov(0.38, dim.height);
+			drawC(g, dx, dy);
+		}
+		if(A[1][2] == 2)	{
+			dx = ptov(0.68, dim.width);
+			dy = ptov(0.38, dim.height);
+			drawC(g, dx, dy);
+		}
+		if(A[2][0] == 2)	{
+			dx = ptov(0.09, dim.width);
+			dy = ptov(0.68, dim.height);
+			drawC(g, dx, dy);
+		}
+		if(A[2][1] == 2)	{
+			dx = ptov(0.38, dim.width);
+			dy = ptov(0.68, dim.height);
+			drawC(g, dx, dy);
+		}
+		if(A[2][2] == 2)	{
+			dx = ptov(0.68, dim.width);
+			dy = ptov(0.68, dim.height);
+			drawC(g, dx, dy);
+		}
 			
 			
 //		drawX(g, dx, dy);
@@ -254,6 +277,7 @@ class MyMouseAdapter extends MouseAdapter	{
 	public void mouseClicked(MouseEvent ME)	{
 		T.showStatus(" CLICK!");
 		T.hit(ME.getX(), ME.getY());
+		T.playOpp();
 		T.repaint();
 	}
 }
