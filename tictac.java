@@ -1,5 +1,5 @@
 /*
-	TIC-TAC-TOW PROJECT
+	TIC-TAC-TOE PROJECT
 	(Program under development)
 
 	Main implementation of tic tac toe
@@ -58,10 +58,11 @@ public class tictac extends Applet	{
 	}
 
 	public void drawC(Graphics g, int xx, int yy)	{
+		
 		if( xx == 0 && yy == 0 )	
 			return;
 
-		g.drawOval( xx, yy, ptov(0.23, dim.width), ptov(0.23, dim.height) );
+		g.fillOval( xx, yy, ptov(0.23, dim.width), ptov(0.23, dim.height) );
 
 	}
 
@@ -160,8 +161,9 @@ public class tictac extends Applet	{
 					dy = ptov(0.68, dim.height);
 					break;
 		}
-//		drawX(g, dx, dy);
-		drawC(g, dx, dy);
+		drawX(g, dx, dy);
+//		drawC(g, dx, dy);
+		showStatus(" Best if you do not resize ");
 	}
 
 	public void paint(Graphics g)	{
@@ -193,4 +195,5 @@ class MyMouseMotionAdapter extends MouseMotionAdapter	{
 	public void mouseMoved(MouseEvent ME)	{
 		T.showStatus( " ( " + ME.getX() + ", " + ME.getY() + ")");
 	}
+	
 }
