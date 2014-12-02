@@ -28,6 +28,8 @@ public class tictac extends Applet	{
 	double h_end;	//ending x co-ordinate of horizontal line
 	double v_start;	//starting y co-ordinate or vertical line
 	double v_end;	//ending y co-ordinate of vertical line
+	
+	boolean win = false; int ws = 0, we = 0;
 
 	int lasthit = 0; //keeps track of which square was hit last (numbered as shown below)
 	int [][]A = new int[3][3];
@@ -199,9 +201,22 @@ public class tictac extends Applet	{
 					return;
 				}
 			}
-			else if(A[1][1] == 1)	{
-				if(A[0][0] == -1)	{
+			else if(A[1][1] == 1)	{	//middle-centre
+				if(A[0][0] == -1)	{	//top-left
 					A[0][0] = 2;
+					return;
+				}
+			}
+			
+			else if(A[1][2] == 1)	{	//middle-right
+				if(A[0][2] == -1)	{	//top-right
+					A[0][2] = 2;
+					return;
+				}
+			}
+			else if(A[0][2] == 1)	{	//top-right
+				if(A[1][2] == -1)	{	//middle-right
+					A[1][2] = 2;
 					return;
 				}
 			}
@@ -255,7 +270,24 @@ public class tictac extends Applet	{
 				}
 			}
 		}
+		//---END OF BLOCK---|
+		
+		if(A[1][1] ==  -1)	{
+			A[1][1]  = 2;
+			return;
+		}
+		
 	}
+	
+	public void winCheck()	{		
+		if(A[0][1] == 1 && A[1][1] == 1 && A[2][1] == 1)	{
+			win = true;
+			ws = 2;
+			we = 7;
+			showStatus("X WIN");
+			repaint();			
+		}
+	}	
 
 	public void update(Graphics g)	{
 		/*
@@ -380,7 +412,23 @@ public class tictac extends Applet	{
 			drawC(g, dx, dy);
 		}
 			
+		
+		if(win == true)	{	//if somebody has WON!..
 			
+			int x1, x2;
+			int y1, y2;
+			
+			if(ws == 2 && we == 7)	{
+				x1 = ptov(0.5, dim.width);
+				x2 = x1;
+				y1 = ptov(0.1, dim.height);
+				y2 = ptov(0.9, dim.height);
+				
+				g.drawLine(x1, y1, x2, y2);
+				g.drawLine(x1-1, y1, x2-1, y2);
+			}
+			
+		}	
 //		drawX(g, dx, dy);
 //		drawC(g, dx, dy);
 //		showStatus(" Best if you do not resize ");
@@ -401,7 +449,9 @@ class MyMouseAdapter extends MouseAdapter	{
 	public void mouseClicked(MouseEvent ME)	{
 		T.showStatus(" CLICK!");
 		T.hit(ME.getX(), ME.getY());
+		T.winCheck();
 		T.playOpp();
+		T.winCheck();
 		T.repaint();
 	}
 }
