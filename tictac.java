@@ -280,9 +280,58 @@ public class tictac extends Applet	{
 	}
 	
 	public void winCheck()	{		
-		if(A[0][1] == 1 && A[1][1] == 1 && A[2][1] == 1)	{
+		if(A[0][0] == 1 && A[0][1] == 1 && A[0][2] == 1)	{ // ^ --- 
+			win = true;
+			ws = 1;
+			we = 3;
+			repaint();			
+		}
+		else if(A[1][0] == 1 && A[1][1] == 1 && A[1][2] == 1)	{ // ~ --- 
+			win = true;
+			ws = 4;
+			we = 6;
+			repaint();			
+		}
+		else if(A[2][0] == 1 && A[2][1] == 1 && A[2][2] == 1)	{ // _ --- 
+			win = true;
+			ws = 7;
+			we = 9;
+			repaint();			
+		}
+		
+		else if(A[0][0] == 1 && A[1][0] == 1 && A[2][0] == 1)	{	// < |
+			win = true;
+			ws = 1;
+			we = 7;
+			showStatus("X WIN");
+			repaint();			
+		}
+		else if(A[0][1] == 1 && A[1][1] == 1 && A[2][1] == 1)	{	// < | >
 			win = true;
 			ws = 2;
+			we = 8;
+			showStatus("X WIN");
+			repaint();			
+		}
+		else if(A[0][2] == 1 && A[1][2] == 1 && A[2][2] == 1)	{	//  | >
+			win = true;
+			ws = 3;
+			we = 9;
+			showStatus("X WIN");
+			repaint();			
+		}
+		
+		else if(A[0][0] == 1 && A[1][1] == 1 && A[2][2] == 1)	{	// \
+			win = true;
+			ws = 1;
+			we = 9;
+			showStatus("X WIN");
+			repaint();			
+		}
+		
+		else if(A[0][2] == 1 && A[1][1] == 1 && A[2][0] == 1)	{	// /
+			win = true;
+			ws = 3;
 			we = 7;
 			showStatus("X WIN");
 			repaint();			
@@ -413,21 +462,68 @@ public class tictac extends Applet	{
 		}
 			
 		
+		
+		
 		if(win == true)	{	//if somebody has WON!..
 			
-			int x1, x2;
-			int y1, y2;
+			int x1 = 0, x2 = 0;
+			int y1 = 0, y2 = 0;
 			
-			if(ws == 2 && we == 7)	{
+			if(ws == 1 && we == 3)	{
+				x1 = ptov(0.1, dim.width);
+				x2 = ptov(0.9, dim.width);
+				y1 = ptov(0.2, dim.height);
+				y2 = y1;
+			}
+			
+			else if(ws == 4 && we == 6)	{
+				x1 = ptov(0.1, dim.width);
+				x2 = ptov(0.9, dim.width);
+				y1 = ptov(0.5, dim.height);
+				y2 = y1;
+			}
+			
+			else if(ws == 7 && we == 9)	{
+				x1 = ptov(0.1, dim.width);
+				x2 = ptov(0.9, dim.width);
+				y1 = ptov(0.8, dim.height);
+				y2 = y1;
+			}
+			
+			else if(ws == 1 && we == 7)	{
+				x1 = ptov(0.2, dim.width);
+				x2 = x1;
+				y1 = ptov(0.1, dim.height);
+				y2 = ptov(0.9, dim.height);
+			}
+			else if(ws == 2 && we == 8)	{
 				x1 = ptov(0.5, dim.width);
 				x2 = x1;
 				y1 = ptov(0.1, dim.height);
 				y2 = ptov(0.9, dim.height);
-				
-				g.drawLine(x1, y1, x2, y2);
-				g.drawLine(x1-1, y1, x2-1, y2);
+			}
+			else if(ws == 3 && we == 9)	{
+				x1 = ptov(0.8, dim.width);
+				x2 = x1;
+				y1 = ptov(0.1, dim.height);
+				y2 = ptov(0.9, dim.height);
 			}
 			
+			else if(ws == 1 && we == 9)	{
+				x1 = ptov(0.1, dim.width);
+				x2 = ptov(0.9, dim.width);
+				y1 = ptov(0.1, dim.height);
+				y2 = ptov(0.9, dim.height);
+			}
+			else if(ws == 3 && we == 7)	{
+				x1 = ptov(0.9, dim.width);
+				x2 = ptov(0.1, dim.width);
+				y1 = ptov(0.1, dim.height);
+				y2 = ptov(0.9, dim.height);
+			}
+			
+			g.drawLine(x1, y1, x2, y2);
+			g.drawLine(x1-1, y1, x2-1, y2);
 		}	
 //		drawX(g, dx, dy);
 //		drawC(g, dx, dy);
@@ -450,7 +546,7 @@ class MyMouseAdapter extends MouseAdapter	{
 		T.showStatus(" CLICK!");
 		T.hit(ME.getX(), ME.getY());
 		T.winCheck();
-		T.playOpp();
+//		T.playOpp();
 		T.winCheck();
 		T.repaint();
 	}
