@@ -46,7 +46,7 @@ public class tictac extends Applet	{
 
 		for(int i = 0; i < 3; i++)
 			for(int j = 0; j < 3; j++)
-				A[i][j] = 0;
+				A[i][j] = -1;
 	}
 
 	public int ptov(double perc, int targ)	{	//returns perc% of targ (in int)
@@ -75,6 +75,7 @@ public class tictac extends Applet	{
 		//xx - x co-ordinate of clicked point
 		//yy - y co-ordinate of clicked point
 
+		
 		if( xx > ptov(0.06, dim.width) && xx < ptov(0.34, dim.width) )	{	//left coloumn
 			if( yy > ptov(0.06,  dim.height) && yy < ptov(0.34, dim.height) )	{
 				lasthit = 1;
@@ -129,8 +130,131 @@ public class tictac extends Applet	{
 	}
 	
 	public void  playOpp()	{
-		A[1][1] = 2; //this is a trial move
+//		A[1][1] = 2; //this is a trial move
+
+		//BLOCK:
+		if(A[0][0] == 1)	{	//top-left
+			if(A[0][1] == 1)	{
+				if(A[0][2] == -1)	{
+					A[0][2] = 2;
+					return;
+				}
+			}
+			else if(A[0][2] == 1)	{
+				if(A[0][1] == -1)
+					A[0][1] = 2;
+			}
+			else if(A[1][0] == 1)	{
+				if(A[2][0] == -1)
+					A[2][0] = 2;
+			}
+			else if(A[2][0] == 1)	{
+				if(A[1][0] == -1)
+					A[1][0] = 2;
+			}
+			else if(A[1][1] == 1)	{
+				if(A[2][2] == -1)
+					A[2][2] = 2;
+			}
+			else if(A[2][2] == 1)	{
+				if(A[1][1] == -1)
+					A[1][1] = 2;
+			}
+		}
 		
+		if(A[2][0] == 1)	{	//bottom-left
+			if(A[2][1] == 1)	{
+				if(A[2][2] == -1)	{
+					A[2][2] = 2;
+				}
+			}
+			else if(A[2][2] == 1)	{
+				if(A[2][1] == -1)	{
+					A[2][1] = 2;
+					return;
+				}
+			}
+			else if(A[1][1] == 1)	{
+				if(A[0][2] == -1)
+					A[0][2] = 2;
+			}
+			else if(A[0][2] == 1)	{
+				if(A[1][1] == -1)	{
+					A[1][1] = 2;
+					return;
+				}
+			}
+		}
+		
+		if(A[2][2] == 1)	{	//bottom-right
+			if(A[2][1] == 1)	{	//bottom-centre
+				if(A[2][0] == -1)	{	//bottom-left;
+					A[2][0] = 2;
+					return;
+				}
+			}
+			else if(A[2][0] == 1)	{	//bottom-left
+				if(A[2][1] == -1)	{	//bottom-centre
+					A[2][1] = 2;
+					return;
+				}
+			}
+			else if(A[1][1] == 1)	{
+				if(A[0][0] == -1)	{
+					A[0][0] = 2;
+					return;
+				}
+			}
+		}
+		
+		if(A[0][2] == 1)	{	//top-right
+			if(A[0][1] == 1)	{	//top-centre
+				if(A[0][0] == -1)	{	//top-left
+					A[0][0] = 2;
+					return;
+				}
+			}
+			else if(A[1][2] == 1)	{	//middle-right
+				if(A[2][2] == -1)	{	//bottom-right
+					A[2][2] = 2;
+					return;
+				}
+			}
+			else if(A[1][1] == 1)	{	//middle-centre
+				if(A[2][0] == -1)	{	//bottom-left
+					A[2][0] = 2;
+					return;
+				}
+			}
+		}
+		
+		if(A[1][1] == 1)	{	//middle-centre
+			if(A[0][1] == 1)	{	//top-centre
+				if(A[2][1] == -1)	{	//bottom-centre
+					A[2][1] = 1;
+					return;
+				}
+			}
+			else if(A[2][1] == 1)	{	//bottom-centre
+				if(A[0][1] == -1)	{	//top-centre
+					A[0][1] = 2;
+					return;
+				}
+			}
+			
+			else if(A[1][0] == 1)	{	//middle-left
+				if(A[1][2] == -1)	{	//middle-right
+					A[1][2] = 2;
+					return;
+				}
+			}
+			else if(A[1][2] == 1)	{	//middle-right
+				if(A[1][0] == -1)	{	//middle-left
+					A[1][0] = 2;
+					return;
+				}
+			}
+		}
 	}
 
 	public void update(Graphics g)	{
