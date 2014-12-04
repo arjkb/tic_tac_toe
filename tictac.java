@@ -8,7 +8,6 @@
 	CODER	: Arjun Krishna Babu
 	GIT		: https://github.com/arjunkbabu/tic_tac_toe
 
-
 */
 
 import java.applet.*;
