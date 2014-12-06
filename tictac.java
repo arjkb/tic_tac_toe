@@ -65,6 +65,7 @@ class MainMenu	extends Frame	{
 		dim[2][0] = D.width/2 - 30;
 		dim[2][1] = D.height/2 + 20;
 	}
+	
 	public void update(Graphics g)	{
 		setDim();
 		g.setColor(Color.black);
@@ -837,16 +838,18 @@ public class tictac {		//MAIN CLASS
 	public static void main(String args[])	{
 		MainMenu MM = new MainMenu();
 		Game T = new Game();
+	
 		int m_choice = 0;
 		
-		MM.setSize(new Dimension(330, 330));
+		MM.setSize(new Dimension(300, 300));
 		MM.setTitle(" Main Menu ");
+		
 		MM.setVisible(true);
 		
 		while(MM.getChoice() != 0) { 
-			System.out.println("ZERO!");
+			System.out.print("");
 		}	//busy wait
-	
+		
 		switch( MM.getChoice() )	{
 			case 0:	MM.setVisible(false);
 					T.setSize(new Dimension(330, 330));
