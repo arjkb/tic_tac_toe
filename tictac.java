@@ -19,7 +19,7 @@ import java.awt.event.*;
 </APPLET>
 */
 
-public class tictac extends Applet	{
+class game extends Frame	{
 	String msg;
 	Dimension dim;
 
@@ -40,12 +40,13 @@ public class tictac extends Applet	{
 		21|21|22
 	*/
 	
-	public void init()	{
+	public game()	{
 //		msg = "Hello";
 		setBackground(Color.black);
 		
 		addMouseListener(new MyMouseAdapter(this));
 		addMouseMotionListener(new MyMouseMotionAdapter(this));
+		addWindowListener(new MyWindowAdapter());
 
 		for(int i = 0; i < 3; i++)
 			for(int j = 0; j < 3; j++)
@@ -96,19 +97,19 @@ public class tictac extends Applet	{
 				lasthit = 1;
 				if(A[0][0] == -1)	
 					A[0][0] = 1;
-				showStatus("SQUARE ONE");
+				////showStatus("SQUARE ONE");
 			}
 			else if( yy > ptov(0.37,  dim.height) && yy < ptov(0.64, dim.height) )	{
 				lasthit = 4;
 				if(A[1][0] == -1)	
 					A[1][0] = 1;
-				showStatus("SQUARE FOUR");
+				//showStatus("SQUARE FOUR");
 			}
 			else if( yy > ptov(0.67,  dim.height) && yy < ptov(0.94, dim.height) )	{
 				lasthit = 7;
 				if(A[2][0] == -1)
 					A[2][0] = 1;
-				showStatus("SQUARE SEVEN");
+				//showStatus("SQUARE SEVEN");
 			}
 		}
 		else if( xx > ptov(0.37, dim.width) && xx < ptov(0.64, dim.width) )	{ //middle coloumn
@@ -116,19 +117,19 @@ public class tictac extends Applet	{
 				lasthit = 2;
 				if(A[0][1] == -1)
 					A[0][1] = 1;
-				showStatus("SQUARE TWO");
+				//showStatus("SQUARE TWO");
 			}
 			else if( yy > ptov(0.37,  dim.height) && yy < ptov(0.64, dim.height) )	{
 				lasthit = 5;
 				if(A[1][1] == -1)
 					A[1][1] = 1;
-				showStatus("SQUARE FIVE");
+				//showStatus("SQUARE FIVE");
 			}
 			else if( yy > ptov(0.67,  dim.height) && yy < ptov(0.94, dim.height) )	{
 				lasthit = 8;
 				if(A[2][1] == -1)
 					A[2][1] = 1;
-				showStatus("SQUARE EIGHT");
+				//showStatus("SQUARE EIGHT");
 			}
 
 		}
@@ -137,19 +138,19 @@ public class tictac extends Applet	{
 				lasthit = 3;
 				if(A[0][2] == -1)
 					A[0][2] = 1;
-				showStatus("SQUARE THREE");
+				//showStatus("SQUARE THREE");
 			}
 			else if( yy > ptov(0.37,  dim.height) && yy < ptov(0.64, dim.height) )	{
 				lasthit = 6;
 				if(A[1][2] == -1)
 					A[1][2] = 1;
-				showStatus("SQUARE SIX");
+				//showStatus("SQUARE SIX");
 			}
 			else if( yy > ptov(0.67,  dim.height) && yy < ptov(0.94, dim.height) )	{
 				lasthit = 9;
 				if(A[2][2] == -1)
 					A[2][2] = 1;
-				showStatus("SQUARE NINE");
+				//showStatus("SQUARE NINE");
 			}
 		}			
 	}
@@ -407,21 +408,21 @@ public class tictac extends Applet	{
 			win = true;
 			ws = 1;
 			we = 7;
-			showStatus("X WIN");
+			//showStatus("X WIN");
 			repaint();			
 		}
 		else if(A[0][1] == 1 && A[1][1] == 1 && A[2][1] == 1)	{	// < | >
 			win = true;
 			ws = 2;
 			we = 8;
-			showStatus("X WIN");
+			//showStatus("X WIN");
 			repaint();			
 		}
 		else if(A[0][2] == 1 && A[1][2] == 1 && A[2][2] == 1)	{	//  | >
 			win = true;
 			ws = 3;
 			we = 9;
-			showStatus("X WIN");
+			//showStatus("X WIN");
 			repaint();			
 		}
 		
@@ -429,7 +430,7 @@ public class tictac extends Applet	{
 			win = true;
 			ws = 1;
 			we = 9;
-			showStatus("X WIN");
+			//showStatus("X WIN");
 			repaint();			
 		}
 		
@@ -437,7 +438,7 @@ public class tictac extends Applet	{
 			win = true;
 			ws = 3;
 			we = 7;
-			showStatus("X WIN");
+			//showStatus("X WIN");
 			repaint();			
 		}
 		//////
@@ -464,21 +465,21 @@ public class tictac extends Applet	{
 			win = true;
 			ws = 1;
 			we = 7;
-			showStatus("X WIN");
+			//showStatus("X WIN");
 			repaint();			
 		}
 		else if(A[0][1] == 2 && A[1][1] == 2 && A[2][1] == 2)	{	// < | >
 			win = true;
 			ws = 2;
 			we = 8;
-			showStatus("X WIN");
+			//showStatus("X WIN");
 			repaint();			
 		}
 		else if(A[0][2] == 2 && A[1][2] == 2 && A[2][2] == 2)	{	//  | >
 			win = true;
 			ws = 3;
 			we = 9;
-			showStatus("X WIN");
+			//showStatus("X WIN");
 			repaint();			
 		}
 		
@@ -486,7 +487,7 @@ public class tictac extends Applet	{
 			win = true;
 			ws = 1;
 			we = 9;
-			showStatus("X WIN");
+			//showStatus("X WIN");
 			repaint();			
 		}
 		
@@ -494,7 +495,7 @@ public class tictac extends Applet	{
 			win = true;
 			ws = 3;
 			we = 7;
-			showStatus("X WIN");
+			//showStatus("X WIN");
 			repaint();			
 		}
 	}	
@@ -693,7 +694,7 @@ public class tictac extends Applet	{
 		}	
 //		drawX(g, dx, dy);
 //		drawC(g, dx, dy);
-//		showStatus(" Best if you do not resize ");
+//		//showStatus(" Best if you do not resize ");
 	}
 
 	public void paint(Graphics g)	{
@@ -702,14 +703,14 @@ public class tictac extends Applet	{
 }
 
 class MyMouseAdapter extends MouseAdapter	{
-	tictac T;
+	game T;
 
-	MyMouseAdapter(tictac T)	{
+	MyMouseAdapter(game T)	{
 		this.T = T;
 	}
 
 	public void mouseClicked(MouseEvent ME)	{
-		T.showStatus(" CLICK!");
+		//T.showStatus(" CLICK!");
 		T.hit(ME.getX(), ME.getY());
 		
 		try {
@@ -726,13 +727,32 @@ class MyMouseAdapter extends MouseAdapter	{
 }
 
 class MyMouseMotionAdapter extends MouseMotionAdapter	{
-	tictac T;
+	game T;
 
-	MyMouseMotionAdapter(tictac T)	{
+	MyMouseMotionAdapter(game T)	{
 		this.T = T;
 	}
 
 	public void mouseMoved(MouseEvent ME)	{
-		T.showStatus( " ( " + ME.getX() + ", " + ME.getY() + ")");
+		//T.showStatus( " ( " + ME.getX() + ", " + ME.getY() + ")");
 	}	
 }
+
+class MyWindowAdapter extends WindowAdapter	{
+	//for closing the window
+	public void windowClosing()	{
+		System.exit(0);
+	}
+}
+
+public class tictac {
+	public static void main(String args[])	{
+		game T = new game();
+		T.setSize(new Dimension(330, 330));
+		
+		T.setTitle(" TIC TAC TOE ");
+		
+		T.setVisible(true);
+	}	
+}
+
