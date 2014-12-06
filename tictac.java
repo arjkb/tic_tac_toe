@@ -19,7 +19,76 @@ import java.awt.event.*;
 </APPLET>
 */
 
-class game extends Frame	{
+class MainMenu	extends Frame	{
+	String msg;
+	Dimension D;
+	boolean flag;
+
+	int option_ch;
+	public int choice;
+	int selected_option;
+	int dim[][] = new int[3][2];
+
+	
+	String menu_option[] = {"New Game", "Settings", "EXIT"};
+	
+	public MainMenu()	{
+		flag = false;
+//		msg = "Hello";
+		option_ch = 0;
+		choice = -1;
+		
+		addKeyListener( new MyKeyAdapter(this) );
+		addWindowListener( new MyWindowAdapter() );
+		requestFocus();
+	}
+	
+	int getOption()	{
+		return option_ch;
+	}
+	void setOption(int op)	{
+		option_ch = op;
+	}
+	
+	public int getChoice()	{
+		return choice;
+	}
+	
+	void setDim()	{
+		D = getSize();
+		dim[0][0] = D.width/2 - 30;
+		dim[0][1] = D.height/2 - 10;
+		
+		dim[1][0] = D.width/2 - 30;
+		dim[1][1] = D.height/2 + 5;
+		
+		dim[2][0] = D.width/2 - 30;
+		dim[2][1] = D.height/2 + 20;
+	}
+	public void update(Graphics g)	{
+		setDim();
+		g.setColor(Color.black);
+		
+		g.drawString(" A " + choice, 10, 20);
+		
+		g.drawString(menu_option[0], dim[0][0], dim[0][1]);
+		g.drawString(menu_option[1], dim[1][0], dim[1][1]);
+		g.drawString(menu_option[2], dim[2][0], dim[2][1]);
+
+//		g.drawString(msg, 10, 20);
+		g.setColor(Color.red);
+		g.drawString(menu_option[option_ch], dim[option_ch][0], dim[option_ch][1]);
+	}
+	
+	public void paint(Graphics g)	{			
+		update(g);
+	}	
+}
+
+
+class Game extends Frame	{
+	//class that implements actual Game logic
+
 	String msg;
 	Dimension dim;
 
@@ -32,6 +101,7 @@ class game extends Frame	{
 
 	int lasthit = 0; //keeps track of which square was hit last (numbered as shown below)
 	int [][]A = new int[3][3];
+	
 	/*
 		00|01|02
 		-- -- --
@@ -40,7 +110,7 @@ class game extends Frame	{
 		21|21|22
 	*/
 	
-	public game()	{
+	public Game()	{
 //		msg = "Hello";
 		setBackground(Color.black);
 		
@@ -68,9 +138,7 @@ class game extends Frame	{
 		try {
 			Thread.sleep(150);			
 		}
-		catch (InterruptedException E)	{ }
-			
-		
+		catch (InterruptedException E)	{ }	
 		
 		g.drawLine(xx + ptov(0.23, dim.width), yy, xx, yy + ptov(0.23, dim.height) );
 		g.drawLine(xx + ptov(0.23, dim.width)+1, yy, xx+1, yy + ptov(0.23, dim.height) );
@@ -703,9 +771,9 @@ class game extends Frame	{
 }
 
 class MyMouseAdapter extends MouseAdapter	{
-	game T;
+	Game T;
 
-	MyMouseAdapter(game T)	{
+	MyMouseAdapter(Game T)	{
 		this.T = T;
 	}
 
@@ -727,9 +795,9 @@ class MyMouseAdapter extends MouseAdapter	{
 }
 
 class MyMouseMotionAdapter extends MouseMotionAdapter	{
-	game T;
+	Game T;
 
-	MyMouseMotionAdapter(game T)	{
+	MyMouseMotionAdapter(Game T)	{
 		this.T = T;
 	}
 
@@ -745,14 +813,46 @@ class MyWindowAdapter extends WindowAdapter	{
 	}
 }
 
-public class tictac {
-	public static void main(String args[])	{
-		game T = new game();
-		T.setSize(new Dimension(330, 330));
-		
-		T.setTitle(" TIC TAC TOE ");
-		
-		T.setVisible(true);
-	}	
+class MyKeyAdapter extends KeyAdapter	{
+	MainMenu m;
+
+	MyKeyAdapter(MainMenu m)	{
+		this.m = m;
+	}
+	
+	public void keyPressed(KeyEvent K)	{
+		int code = K.getKeyCode();
+		switch(code)	{
+			case KeyEvent.VK_DOWN: m.option_ch++;	   break;
+			case KeyEvent.VK_UP	 : m.option_ch--;	   break;
+			case KeyEvent.VK_ENTER: m.choice = m.option_ch; 
+									break;
+		}
+		m.repaint();
+	}
 }
 
+public class tictac {		//MAIN CLASS
+	
+	public static void main(String args[])	{
+		MainMenu MM = new MainMenu();
+		Game T = new Game();
+		int m_choice = 0;
+		
+		MM.setSize(new Dimension(330, 330));
+		MM.setTitle(" Main Menu ");
+		MM.setVisible(true);
+		
+		while(MM.getChoice() != 0) { 
+			System.out.println("ZERO!");
+		}	//busy wait
+	
+		switch( MM.getChoice() )	{
+			case 0:	MM.setVisible(false);
+					T.setSize(new Dimension(330, 330));
+					T.setTitle(" TIC TAC TOE ");
+					T.setVisible(true);
+					break;
+		}
+	}	
+}
