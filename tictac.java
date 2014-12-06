@@ -33,11 +33,11 @@ public class tictac extends Applet	{
 	int lasthit = 0; //keeps track of which square was hit last (numbered as shown below)
 	int [][]A = new int[3][3];
 	/*
-		1|2|3
-		- - -
-		4|5|6
-		- - -
-		7|8|9
+		00|01|02
+		-- -- --
+		10|11|12
+		-- -- --
+		21|21|22
 	*/
 	
 	public void init()	{
