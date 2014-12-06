@@ -740,7 +740,7 @@ class MyMouseMotionAdapter extends MouseMotionAdapter	{
 
 class MyWindowAdapter extends WindowAdapter	{
 	//for closing the window
-	public void windowClosing()	{
+	public void windowClosing(WindowEvent w)	{
 		System.exit(0);
 	}
 }
