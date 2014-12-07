@@ -61,35 +61,7 @@ class MainMenu extends Frame	{
 	public int getChoice()	{
 		return choice;
 	}
-	
-	void setDim()	{
-		D = getSize();
-		dim[0][0] = D.width/2 - 30;
-		dim[0][1] = D.height/2 - 10;
-		
-		dim[1][0] = D.width/2 - 30;
-		dim[1][1] = D.height/2 + 5;
-		
-		dim[2][0] = D.width/2 - 30;
-		dim[2][1] = D.height/2 + 20;
-	}
-	
-	public void update(Graphics g)	{
-		setDim();
-		
-//		g.setColor(Color.black);
-		
-//		g.drawString(" A " + choice, 10, 20);
-/*		
-		g.drawString(menu_option[0], dim[0][0], dim[0][1]);
-		g.drawString(menu_option[1], dim[1][0], dim[1][1]);
-		g.drawString(menu_option[2], dim[2][0], dim[2][1]);
-*/
-//		g.drawString(msg, 10, 20);
-//		g.setColor(Color.red);
-//		g.drawString(menu_option[option_ch], dim[option_ch][0], dim[option_ch][1]);
-	}
-	
+
 	public void paint(Graphics g)	{			
 //		update(g);
 		g.setColor(Color.blue);
@@ -1189,8 +1161,6 @@ class MyKeyAdapter extends KeyAdapter	{
 	public void keyPressed(KeyEvent K)	{
 		int code = K.getKeyCode();
 		switch(code)	{
-//			case KeyEvent.VK_DOWN: m.option_ch++;	   break;
-//			case KeyEvent.VK_UP	 : m.option_ch--;	   break;
 			case KeyEvent.VK_ENTER: m.choice = m.option_ch; 
 									break;
 		}
