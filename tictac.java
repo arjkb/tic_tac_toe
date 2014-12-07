@@ -98,6 +98,9 @@ class Game extends Frame	{
 	double v_start;	//starting y co-ordinate or vertical line
 	double v_end;	//ending y co-ordinate of vertical line
 	
+	int scorex;
+	int scorey;
+	
 	boolean win = false; int ws = 0, we = 0;
 	int whowin; //1 indicates human won, 2 indicated computer won
 	WinWindow WW = new WinWindow(this);
@@ -116,12 +119,15 @@ class Game extends Frame	{
 	public Game()	{
 //		msg = "Hello";
 
+		scorex = 100;
+		scorey = 100;
+		
 		whowin = 0;
 		
 		setBackground(Color.black);
 		
 		
-		WW.setSize(new Dimension(330, 70));
+		WW.setSize(new Dimension(300, 220));
 		
 		addMouseListener(new MyMouseAdapter(this));
 		addMouseMotionListener(new MyMouseMotionAdapter(this));
@@ -172,40 +178,52 @@ class Game extends Frame	{
 		if( xx > ptov(0.06, dim.width) && xx < ptov(0.34, dim.width) )	{	//left coloumn
 			if( yy > ptov(0.06,  dim.height) && yy < ptov(0.34, dim.height) )	{
 				lasthit = 1;
-				if(A[0][0] == -1)	
+				if(A[0][0] == -1)	{
 					A[0][0] = 1;
+					scorex -= 10;
+				}
 				////showStatus("SQUARE ONE");
 			}
 			else if( yy > ptov(0.37,  dim.height) && yy < ptov(0.64, dim.height) )	{
 				lasthit = 4;
-				if(A[1][0] == -1)	
+				if(A[1][0] == -1)	{
 					A[1][0] = 1;
+					scorex -= 10;
+				}
 				//showStatus("SQUARE FOUR");
 			}
 			else if( yy > ptov(0.67,  dim.height) && yy < ptov(0.94, dim.height) )	{
 				lasthit = 7;
-				if(A[2][0] == -1)
+				if(A[2][0] == -1)	{
 					A[2][0] = 1;
+					scorex -= 10;
+				}
 				//showStatus("SQUARE SEVEN");
 			}
 		}
 		else if( xx > ptov(0.37, dim.width) && xx < ptov(0.64, dim.width) )	{ //middle coloumn
 			if( yy > ptov(0.06,  dim.height) && yy < ptov(0.34, dim.height) )	{
 				lasthit = 2;
-				if(A[0][1] == -1)
+				if(A[0][1] == -1)	{
 					A[0][1] = 1;
+					scorex -= 10;
+				}
 				//showStatus("SQUARE TWO");
 			}
 			else if( yy > ptov(0.37,  dim.height) && yy < ptov(0.64, dim.height) )	{
 				lasthit = 5;
-				if(A[1][1] == -1)
+				if(A[1][1] == -1)	{
 					A[1][1] = 1;
+					scorex -= 10;
+				}
 				//showStatus("SQUARE FIVE");
 			}
 			else if( yy > ptov(0.67,  dim.height) && yy < ptov(0.94, dim.height) )	{
 				lasthit = 8;
-				if(A[2][1] == -1)
+				if(A[2][1] == -1)	{
 					A[2][1] = 1;
+					scorex -= 10;
+				}
 				//showStatus("SQUARE EIGHT");
 			}
 		}
@@ -213,20 +231,26 @@ class Game extends Frame	{
 		else if( xx > ptov(0.67, dim.width) && xx < ptov(0.92, dim.width) )	{ //right coloumn
 			if( yy > ptov(0.06,  dim.height) && yy < ptov(0.34, dim.height) )	{
 				lasthit = 3;
-				if(A[0][2] == -1)
+				if(A[0][2] == -1)	{
 					A[0][2] = 1;
+					scorex -= 10;
+				}
 				//showStatus("SQUARE THREE");
 			}
 			else if( yy > ptov(0.37,  dim.height) && yy < ptov(0.64, dim.height) )	{
 				lasthit = 6;
-				if(A[1][2] == -1)
+				if(A[1][2] == -1)	{
 					A[1][2] = 1;
+					scorex -= 10;
+				}
 				//showStatus("SQUARE SIX");
 			}
 			else if( yy > ptov(0.67,  dim.height) && yy < ptov(0.94, dim.height) )	{
 				lasthit = 9;
-				if(A[2][2] == -1)
+				if(A[2][2] == -1)	{
 					A[2][2] = 1;
+					scorex -= 10;
+				}
 				//showStatus("SQUARE NINE");
 			}
 		}			
@@ -240,36 +264,42 @@ class Game extends Frame	{
 			if(A[0][1] == 2)	{
 				if(A[0][2] == -1)	{
 					A[0][2] = 2;	
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[0][2] == 2)	{
 				if(A[0][1] == -1)	{
 					A[0][1] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[1][0] == 2)	{
 				if(A[2][0] == -1)	{
 					A[2][0] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[2][0] == 2)	{
 				if(A[1][0] == -1)	{
 					A[1][0] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[1][1] == 2)	{
 				if(A[2][2] == -1)	{
 					A[2][2] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[2][2] == 2)	{
 				if(A[1][1] == -1)	{
 					A[1][1] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
@@ -279,24 +309,28 @@ class Game extends Frame	{
 			if(A[2][1] == 2)	{
 				if(A[2][2] == -1)	{
 					A[2][2] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[2][2] == 2)	{
 				if(A[2][1] == -1)	{
 					A[2][1] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[1][1] == 2)	{
 				if(A[0][2] == -1)	{
 					A[0][2] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[0][2] == 2)	{
 				if(A[1][1] == -1)	{
 					A[1][1] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
@@ -306,18 +340,21 @@ class Game extends Frame	{
 			if(A[2][1] == 2)	{	//bottom-centre
 				if(A[2][0] == -1)	{	//bottom-left;
 					A[2][0] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[2][0] == 2)	{	//bottom-left
 				if(A[2][1] == -1)	{	//bottom-centre
 					A[2][1] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[1][1] == 2)	{	//middle-centre
 				if(A[0][0] == -1)	{	//top-left
 					A[0][0] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
@@ -325,12 +362,14 @@ class Game extends Frame	{
 			else if(A[1][2] == 2)	{	//middle-right
 				if(A[0][2] == -1)	{	//top-right
 					A[0][2] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[0][2] == 2)	{	//top-right
 				if(A[1][2] == -1)	{	//middle-right
 					A[1][2] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
@@ -340,18 +379,21 @@ class Game extends Frame	{
 			if(A[0][1] == 2)	{	//top-centre
 				if(A[0][0] == -1)	{	//top-left
 					A[0][0] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[1][2] == 2)	{	//middle-right
 				if(A[2][2] == -1)	{	//bottom-right
 					A[2][2] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[1][1] == 2)	{	//middle-centre
 				if(A[2][0] == -1)	{	//bottom-left
 					A[2][0] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
@@ -361,12 +403,14 @@ class Game extends Frame	{
 			if(A[0][1] == 2)	{	//top-centre
 				if(A[2][1] == -1)	{	//bottom-centre
 					A[2][1] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[2][1] == 2)	{	//bottom-centre
 				if(A[0][1] == -1)	{	//top-centre
 					A[0][1] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
@@ -374,12 +418,14 @@ class Game extends Frame	{
 			else if(A[1][0] == 2)	{	//middle-left
 				if(A[1][2] == -1)	{	//middle-right
 					A[1][2] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[1][2] == 2)	{	//middle-right
 				if(A[1][0] == -1)	{	//middle-left
 					A[1][0] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
@@ -392,37 +438,43 @@ class Game extends Frame	{
 		if(A[0][0] == 1)	{	//top-left
 			if(A[0][1] == 1)	{
 				if(A[0][2] == -1)	{
-					A[0][2] = 2;	
+					A[0][2] = 2;
+					scorey -= 10;	
 					return;
 				}
 			}
 			else if(A[0][2] == 1)	{
 				if(A[0][1] == -1)	{
 					A[0][1] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[1][0] == 1)	{
 				if(A[2][0] == -1)	{
 					A[2][0] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[2][0] == 1)	{
 				if(A[1][0] == -1)	{
 					A[1][0] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[1][1] == 1)	{
 				if(A[2][2] == -1)	{
 					A[2][2] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[2][2] == 1)	{
 				if(A[1][1] == -1)	{
 					A[1][1] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
@@ -432,24 +484,28 @@ class Game extends Frame	{
 			if(A[2][1] == 1)	{
 				if(A[2][2] == -1)	{
 					A[2][2] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[2][2] == 1)	{
 				if(A[2][1] == -1)	{
 					A[2][1] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[1][1] == 1)	{
 				if(A[0][2] == -1)	{
 					A[0][2] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[0][2] == 1)	{
 				if(A[1][1] == -1)	{
 					A[1][1] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
@@ -459,18 +515,21 @@ class Game extends Frame	{
 			if(A[2][1] == 1)	{	//bottom-centre
 				if(A[2][0] == -1)	{	//bottom-left;
 					A[2][0] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[2][0] == 1)	{	//bottom-left
 				if(A[2][1] == -1)	{	//bottom-centre
 					A[2][1] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[1][1] == 1)	{	//middle-centre
 				if(A[0][0] == -1)	{	//top-left
 					A[0][0] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
@@ -478,12 +537,14 @@ class Game extends Frame	{
 			else if(A[1][2] == 1)	{	//middle-right
 				if(A[0][2] == -1)	{	//top-right
 					A[0][2] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[0][2] == 1)	{	//top-right
 				if(A[1][2] == -1)	{	//middle-right
 					A[1][2] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
@@ -493,18 +554,21 @@ class Game extends Frame	{
 			if(A[0][1] == 1)	{	//top-centre
 				if(A[0][0] == -1)	{	//top-left
 					A[0][0] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[1][2] == 1)	{	//middle-right
 				if(A[2][2] == -1)	{	//bottom-right
 					A[2][2] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[1][1] == 1)	{	//middle-centre
 				if(A[2][0] == -1)	{	//bottom-left
 					A[2][0] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
@@ -514,12 +578,14 @@ class Game extends Frame	{
 			if(A[0][1] == 1)	{	//top-centre
 				if(A[2][1] == -1)	{	//bottom-centre
 					A[2][1] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[2][1] == 1)	{	//bottom-centre
 				if(A[0][1] == -1)	{	//top-centre
 					A[0][1] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
@@ -527,12 +593,14 @@ class Game extends Frame	{
 			else if(A[1][0] == 1)	{	//middle-left
 				if(A[1][2] == -1)	{	//middle-right
 					A[1][2] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
 			else if(A[1][2] == 1)	{	//middle-right
 				if(A[1][0] == -1)	{	//middle-left
 					A[1][0] = 2;
+					scorey -= 10;
 					return;
 				}
 			}
@@ -542,6 +610,7 @@ class Game extends Frame	{
 		//CENTRE (if centre is free, play center)
 		if(A[1][1] ==  -1)	{
 			A[1][1]  = 2;
+			scorey -= 10;
 			return;
 		}
 		//---END OF CENTRE---|
@@ -550,12 +619,14 @@ class Game extends Frame	{
 		if(A[0][0] == 1)	{	//top-left		
 			if(A[2][2] == -1)	{	//bottom-right
 				A[2][2] = 2;
+				scorey -= 10;
 				return;
 			}
 		}
 		if(A[2][2] == 1)	{	//bottom-right
 			if(A[0][0] == -1)	{	//top-left
 				A[0][0] = 2;
+				scorey -= 10;
 				return;
 			}
 		}
@@ -563,12 +634,14 @@ class Game extends Frame	{
 		 if(A[0][2] == 1)	{	//top-right
 			if(A[2][0] == -1)	{	//bottom-left
 				A[2][0] = 2;
+				scorey -= 10;
 				return;
 			}
 		}
 		if(A[2][0] == 1)	{	//bottom-left
 			if(A[0][2] == -1)	{	//top-right
 				A[0][2] = 2;
+				scorey -= 10;
 				return;
 			}
 		}
@@ -577,6 +650,7 @@ class Game extends Frame	{
 		//EMPTY CORNER	
 		if(A[0][0] == -1)	{	//top-left
 			A[0][0] = 2;
+			scorey -= 10;
 			return;
 		}
 		if(A[0][2] == -1)	{	//top-right
@@ -585,10 +659,12 @@ class Game extends Frame	{
 		}
 		if(A[2][0] == -1)	{	//bottom-left
 			A[2][0] = 2;
+			scorey -= 10;
 			return;
 		}
 		if(A[2][2] == -1)	{	//bottom-right
 			A[2][2] = 2;
+			scorey -= 10;
 			return;
 		}		
 		//---END OF EMPTY CORNER--|
@@ -596,18 +672,22 @@ class Game extends Frame	{
 		//EMPTY SIDE
 		if(A[0][1] == -1)	{
 			A[0][1] = 2;
+			scorey -= 10;
 			return;
 		}
 		if(A[1][0] == -1)	{
 			A[1][0] = 2;
+			scorey -= 10;
 			return;
 		}
 		if(A[2][1] == -1)	{
 			A[2][1] = 2;
+			scorey -= 10;
 			return;
 		}
 		if(A[1][2] == -1)	{
 			A[1][2] = 2;
+			scorey -= 10;
 			return;
 		}
 		//---END OF EMPTY SIDE---|
@@ -742,6 +822,10 @@ class Game extends Frame	{
 			we = 7;
 			whowin = 2;
 			repaint();			
+		}
+		switch(whowin)	{
+			case 1: scorex += 100;	break;
+			case 2: scorey += 100; 	break;
 		}
 	}	
 
@@ -953,24 +1037,33 @@ class WinWindow	extends Frame	{
 	
 	Game gref;
 	
+	Font F; 
+	
 	public WinWindow(Game gref)	{
+		F = new Font("Dialog", Font.BOLD, 12);
+		
 		this.gref = gref;
+		setFont(F);
 		addWindowListener(new MyWindowAdapter());
 	}
 	
 	public void paint(Graphics g)	{
+		    g.drawString(" SCORECARD! ", 40, 50);
+		    g.drawString(" ---------- ", 40, 55);
+		    
 		if(gref.whowin == 1)	
-			g.drawString(" YAY! YOU WON!", 30, 50);
+			g.drawString(" YAY! YOU WON!", 30, 70);
 		else if(gref.whowin == 2)	
-			g.drawString(" OOPS! COMPUTER WON!", 30, 50);
+			g.drawString(" OOPS! COMPUTER WON!", 30, 70);
 	}
 }
 
 class MyMouseAdapter extends MouseAdapter	{
 	Game T;
-
+	String currentScore;
 	MyMouseAdapter(Game T)	{
 		this.T = T;
+		currentScore = "";
 	}
 
 	public void mouseClicked(MouseEvent ME)	{
@@ -986,6 +1079,9 @@ class MyMouseAdapter extends MouseAdapter	{
 		
 		T.playOpp();
 		T.winCheck();
+		
+		currentScore = " " + T.scorex + " " + T.scorey; 
+		T.setTitle(currentScore);
 		T.repaint();
 	}
 }
