@@ -10,7 +10,7 @@
 
 */
 
-import java.applet.*;
+//import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -19,7 +19,7 @@ import java.awt.event.*;
 </APPLET>
 */
 
-class MainMenu	extends Frame	{
+class MainMenu extends Frame	{
 	String msg;
 	Dimension D;
 	boolean flag;
@@ -227,6 +227,159 @@ class Game extends Frame	{
 	public void playOpp()	{
 //		A[1][1] = 2; //this is a trial move
 
+		//FORK:
+		if(A[0][0] == 2)	{	//top-left
+			if(A[0][1] == 2)	{
+				if(A[0][2] == -1)	{
+					A[0][2] = 2;	
+					return;
+				}
+			}
+			else if(A[0][2] == 2)	{
+				if(A[0][1] == -1)	{
+					A[0][1] = 2;
+					return;
+				}
+			}
+			else if(A[1][0] == 2)	{
+				if(A[2][0] == -1)	{
+					A[2][0] = 2;
+					return;
+				}
+			}
+			else if(A[2][0] == 2)	{
+				if(A[1][0] == -1)	{
+					A[1][0] = 2;
+					return;
+				}
+			}
+			else if(A[1][1] == 2)	{
+				if(A[2][2] == -1)	{
+					A[2][2] = 2;
+					return;
+				}
+			}
+			else if(A[2][2] == 2)	{
+				if(A[1][1] == -1)	{
+					A[1][1] = 2;
+					return;
+				}
+			}
+		}
+		
+		if(A[2][0] == 2)	{	//bottom-left
+			if(A[2][1] == 2)	{
+				if(A[2][2] == -1)	{
+					A[2][2] = 2;
+					return;
+				}
+			}
+			else if(A[2][2] == 2)	{
+				if(A[2][1] == -1)	{
+					A[2][1] = 2;
+					return;
+				}
+			}
+			else if(A[1][1] == 2)	{
+				if(A[0][2] == -1)	{
+					A[0][2] = 2;
+					return;
+				}
+			}
+			else if(A[0][2] == 2)	{
+				if(A[1][1] == -1)	{
+					A[1][1] = 2;
+					return;
+				}
+			}
+		}
+		
+		if(A[2][2] == 2)	{	//bottom-right
+			if(A[2][1] == 2)	{	//bottom-centre
+				if(A[2][0] == -1)	{	//bottom-left;
+					A[2][0] = 2;
+					return;
+				}
+			}
+			else if(A[2][0] == 2)	{	//bottom-left
+				if(A[2][1] == -1)	{	//bottom-centre
+					A[2][1] = 2;
+					return;
+				}
+			}
+			else if(A[1][1] == 2)	{	//middle-centre
+				if(A[0][0] == -1)	{	//top-left
+					A[0][0] = 2;
+					return;
+				}
+			}
+			
+			else if(A[1][2] == 2)	{	//middle-right
+				if(A[0][2] == -1)	{	//top-right
+					A[0][2] = 2;
+					return;
+				}
+			}
+			else if(A[0][2] == 2)	{	//top-right
+				if(A[1][2] == -1)	{	//middle-right
+					A[1][2] = 2;
+					return;
+				}
+			}
+		}
+		
+		if(A[0][2] == 2)	{	//top-right
+			if(A[0][1] == 2)	{	//top-centre
+				if(A[0][0] == -1)	{	//top-left
+					A[0][0] = 2;
+					return;
+				}
+			}
+			else if(A[1][2] == 2)	{	//middle-right
+				if(A[2][2] == -1)	{	//bottom-right
+					A[2][2] = 2;
+					return;
+				}
+			}
+			else if(A[1][1] == 2)	{	//middle-centre
+				if(A[2][0] == -1)	{	//bottom-left
+					A[2][0] = 2;
+					return;
+				}
+			}
+		}
+		
+		if(A[1][1] == 2)	{	//middle-centre
+			if(A[0][1] == 2)	{	//top-centre
+				if(A[2][1] == -1)	{	//bottom-centre
+					A[2][1] = 2;
+					return;
+				}
+			}
+			else if(A[2][1] == 2)	{	//bottom-centre
+				if(A[0][1] == -1)	{	//top-centre
+					A[0][1] = 2;
+					return;
+				}
+			}
+			
+			else if(A[1][0] == 2)	{	//middle-left
+				if(A[1][2] == -1)	{	//middle-right
+					A[1][2] = 2;
+					return;
+				}
+			}
+			else if(A[1][2] == 2)	{	//middle-right
+				if(A[1][0] == -1)	{	//middle-left
+					A[1][0] = 2;
+					return;
+				}
+			}
+		}
+		
+		
+		//---END OF FORK--|
+		
 		//BLOCK:
 		if(A[0][0] == 1)	{	//top-left
 			if(A[0][1] == 1)	{
