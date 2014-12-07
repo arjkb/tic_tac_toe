@@ -28,6 +28,9 @@ class MainMenu extends Frame	{
 	public int choice;
 	int selected_option;
 	int dim[][] = new int[3][2];
+	
+	Font titleFont;
+	Font contentFont;
 
 	
 	String menu_option[] = {"New Game", "Settings", "EXIT"};
@@ -37,9 +40,14 @@ class MainMenu extends Frame	{
 //		msg = "Hello";
 		option_ch = 0;
 		choice = -1;
-		
+		setBackground(Color.white);
+		titleFont = new Font("Courier 10 Pitch", Font.BOLD, 65); 
+		contentFont = new Font("Liberation Mono", Font.BOLD, 15);
+		 
 		addKeyListener( new MyKeyAdapter(this) );
 		addWindowListener( new MyWindowAdapter() );
+		
+		setBackground(Color.black);
 		requestFocus();
 	}
 	
@@ -68,6 +76,7 @@ class MainMenu extends Frame	{
 	
 	public void update(Graphics g)	{
 		setDim();
+		
 //		g.setColor(Color.black);
 		
 //		g.drawString(" A " + choice, 10, 20);
@@ -83,7 +92,17 @@ class MainMenu extends Frame	{
 	
 	public void paint(Graphics g)	{			
 //		update(g);
-		g.drawString("Press ENTER to play!", 10, 50);
+		g.setColor(Color.blue);
+		
+		g.setFont(titleFont);
+		g.drawString(" TIC-TAC-TOE! ", 0, 100);
+		
+		g.setFont(contentFont);
+		g.drawString(" Welcome to the tic-tac-toe open-source project!", 40, 300);
+		g.drawString(" http://github.com/arjunkbabu/tic_tac_toe", 70, 320);
+//		g.drawString(" Before you play: ", 10, 60);
+//		g.drawString(" 1. Click on a square to make a move", 10, 75);
+		g.drawString(" Press ENTER to play!", 150, 400);
 	}	
 }
 
@@ -126,10 +145,9 @@ class Game extends Frame	{
 		whowin = 0;
 		
 		setBackground(Color.black);
-		
-		
-		WW.setSize(new Dimension(300, 220));
-		
+				
+		WW.setSize(new Dimension(400, 300));
+		WW.setTitle("SCORECARD");
 		addMouseListener(new MyMouseAdapter(this));
 		addMouseMotionListener(new MyMouseMotionAdapter(this));
 		addWindowListener(new MyWindowAdapter());
@@ -1035,29 +1053,73 @@ class Game extends Frame	{
 	}
 }
 
-class WinWindow	extends Frame	{
+class WinWindow	extends Frame implements KeyListener {
 	
 	Game gref;
 	
 	Font F; 
+	CreditWindow CW = new CreditWindow();
 	
 	public WinWindow(Game gref)	{
-		F = new Font("Dialog", Font.BOLD, 12);
+		addKeyListener(this);
+		
+		CW.setTitle("Credits");
+		CW.setVisible(true);
+		F = new Font("Courier 10 Pitch", Font.BOLD, 25);
 		
 		this.gref = gref;
 		setFont(F);
 		addWindowListener(new MyWindowAdapter());
 	}
 	
+	public void keyPressed(KeyEvent KE)	{	}
+	public void keyReleased(KeyEvent KE)	{  	}
+	public void keyTyped(KeyEvent KE)	{	}
+	
 	public void paint(Graphics g)	{
-		    g.drawString(" SCORECARD! ", 40, 50);
-		    g.drawString(" ---------- ", 40, 55);
-		    
+//		    g.drawString(" SCORECARD! ", 40, 50);
+//		    g.drawString(" ---------- ", 40, 55);
+		    g.setFont(F);
 		if(gref.whowin == 1)	
 			g.drawString(" YAY! YOU WON!", 30, 70);
-		else if(gref.whowin == 2)	
+		else if(gref.whowin == 2)	{
 			g.drawString(" OOPS! COMPUTER WON!", 30, 70);
+			g.setFont( new Font("Courier 10 Pitch", Font.BOLD, 40));
+			g.drawString("GAME OVER!!", 30, 120);
+		}
 	}
+}
+
+class CreditWindow extends Frame	{
+	int i, y;
+	Font F;
+	String name[] = {"Ms. Resmi T. R.", 
+					 "Ms. Thushara M. G.",
+					 "Akhil Raj",
+					 "Athul Justin",
+					 "Franklin Thomas",
+					 "Joyce George",
+					 "Krishna Chandran",
+					 "Lekshmi Venkatraman",
+					 "Vivek Ravindran",
+					 "Vysakh S"					 
+					};
+					
+	CreditWindow()	{
+		setSize(new Dimension(500, 500));
+		F = new Font("Liberation Serif", Font.BOLD, 15);
+		addWindowListener(new MyWindowAdapter());
+	}
+		
+	public void paint(Graphics g)	{
+		g.setFont(F);
+		g.drawString(" SPECIAL THANKS ", 100, 10);
+		for(i = 0, y = 30; i < name.length; i++, y += 20)
+			g.drawString(name[i], 20, y);
+		
+		g.drawString("Program developed by Arjun Krishna Babu", 20, y + 30);
+	}
+	
 }
 
 class MyMouseAdapter extends MouseAdapter	{
@@ -1134,7 +1196,7 @@ public class tictac {		//MAIN CLASS
 	
 		int m_choice = 0;
 		
-		MM.setSize(new Dimension(330, 330));
+		MM.setSize(new Dimension(500, 500));
 		MM.setTitle(" Main Menu ");
 		
 		MM.setVisible(true);
@@ -1145,7 +1207,7 @@ public class tictac {		//MAIN CLASS
 		
 		switch( MM.getChoice() )	{
 			case 0:	MM.setVisible(false);
-					T.setSize(new Dimension(330, 396));
+					T.setSize(new Dimension(500, 500));
 					T.setTitle(" TIC TAC TOE ");
 					T.setVisible(true);
 					break;
