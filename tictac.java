@@ -68,21 +68,22 @@ class MainMenu extends Frame	{
 	
 	public void update(Graphics g)	{
 		setDim();
-		g.setColor(Color.black);
+//		g.setColor(Color.black);
 		
-		g.drawString(" A " + choice, 10, 20);
-		
+//		g.drawString(" A " + choice, 10, 20);
+/*		
 		g.drawString(menu_option[0], dim[0][0], dim[0][1]);
 		g.drawString(menu_option[1], dim[1][0], dim[1][1]);
 		g.drawString(menu_option[2], dim[2][0], dim[2][1]);
-
+*/
 //		g.drawString(msg, 10, 20);
-		g.setColor(Color.red);
-		g.drawString(menu_option[option_ch], dim[option_ch][0], dim[option_ch][1]);
+//		g.setColor(Color.red);
+//		g.drawString(menu_option[option_ch], dim[option_ch][0], dim[option_ch][1]);
 	}
 	
 	public void paint(Graphics g)	{			
-		update(g);
+//		update(g);
+		g.drawString("Press ENTER to play!", 10, 50);
 	}	
 }
 
@@ -260,6 +261,37 @@ class Game extends Frame	{
 //		A[1][1] = 2; //this is a trial move
 
 		//FORK:
+		if(A[1][1] == 1)	{	//middle-centre
+			if(A[0][1] == 1)	{	//top-centre
+				if(A[2][1] == -1)	{	//bottom-centre
+					A[2][1] = 2;
+					scorey -= 10;
+					return;
+				}
+			}
+			else if(A[2][1] == 1)	{	//bottom-centre
+				if(A[0][1] == -1)	{	//top-centre
+					A[0][1] = 2;
+					scorey -= 10;
+					return;
+				}
+			}
+			
+			else if(A[1][0] == 1)	{	//middle-left
+				if(A[1][2] == -1)	{	//middle-right
+					A[1][2] = 2;
+					scorey -= 10;
+					return;
+				}
+			}
+			else if(A[1][2] == 1)	{	//middle-right
+				if(A[1][0] == -1)	{	//middle-left
+					A[1][0] = 2;
+					scorey -= 10;
+					return;
+				}
+			}
+		}
 		if(A[0][0] == 2)	{	//top-left
 			if(A[0][1] == 2)	{
 				if(A[0][2] == -1)	{
@@ -574,37 +606,7 @@ class Game extends Frame	{
 			}
 		}
 		
-		if(A[1][1] == 1)	{	//middle-centre
-			if(A[0][1] == 1)	{	//top-centre
-				if(A[2][1] == -1)	{	//bottom-centre
-					A[2][1] = 2;
-					scorey -= 10;
-					return;
-				}
-			}
-			else if(A[2][1] == 1)	{	//bottom-centre
-				if(A[0][1] == -1)	{	//top-centre
-					A[0][1] = 2;
-					scorey -= 10;
-					return;
-				}
-			}
-			
-			else if(A[1][0] == 1)	{	//middle-left
-				if(A[1][2] == -1)	{	//middle-right
-					A[1][2] = 2;
-					scorey -= 10;
-					return;
-				}
-			}
-			else if(A[1][2] == 1)	{	//middle-right
-				if(A[1][0] == -1)	{	//middle-left
-					A[1][0] = 2;
-					scorey -= 10;
-					return;
-				}
-			}
-		}
+		
 		//---END OF BLOCK---|
 		
 		//CENTRE (if centre is free, play center)
@@ -1115,8 +1117,8 @@ class MyKeyAdapter extends KeyAdapter	{
 	public void keyPressed(KeyEvent K)	{
 		int code = K.getKeyCode();
 		switch(code)	{
-			case KeyEvent.VK_DOWN: m.option_ch++;	   break;
-			case KeyEvent.VK_UP	 : m.option_ch--;	   break;
+//			case KeyEvent.VK_DOWN: m.option_ch++;	   break;
+//			case KeyEvent.VK_UP	 : m.option_ch--;	   break;
 			case KeyEvent.VK_ENTER: m.choice = m.option_ch; 
 									break;
 		}
