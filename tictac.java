@@ -1056,6 +1056,7 @@ class Game extends Frame	{
 class WinWindow	extends Frame implements KeyListener {
 	
 	Game gref;
+	int kk;
 	
 	Font F; 
 	CreditWindow CW = new CreditWindow();
@@ -1064,7 +1065,7 @@ class WinWindow	extends Frame implements KeyListener {
 		addKeyListener(this);
 		
 		CW.setTitle("Credits");
-		CW.setVisible(true);
+	//	CW.setVisible(true);
 		F = new Font("Courier 10 Pitch", Font.BOLD, 25);
 		
 		this.gref = gref;
@@ -1074,7 +1075,14 @@ class WinWindow	extends Frame implements KeyListener {
 	
 	public void keyPressed(KeyEvent KE)	{	}
 	public void keyReleased(KeyEvent KE)	{  	}
-	public void keyTyped(KeyEvent KE)	{	}
+	public void keyTyped(KeyEvent KE)	{	
+		kk = KE.getKeyChar();
+		if(kk == KeyEvent.VK_SPACE)	{
+			setVisible(false);
+			CW.setVisible(true);
+		}
+			
+	}
 	
 	public void paint(Graphics g)	{
 //		    g.drawString(" SCORECARD! ", 40, 50);
@@ -1087,6 +1095,8 @@ class WinWindow	extends Frame implements KeyListener {
 			g.setFont( new Font("Courier 10 Pitch", Font.BOLD, 40));
 			g.drawString("GAME OVER!!", 30, 120);
 		}
+		g.setFont(new Font("Courier 10 Pitch", Font.BOLD, 15));
+		g.drawString(" Press SPACE to view credits", 20, 250);
 	}
 }
 
@@ -1113,8 +1123,8 @@ class CreditWindow extends Frame	{
 		
 	public void paint(Graphics g)	{
 		g.setFont(F);
-		g.drawString(" SPECIAL THANKS ", 100, 10);
-		for(i = 0, y = 30; i < name.length; i++, y += 20)
+		g.drawString(" SPECIAL THANKS ", 100, 30);
+		for(i = 0, y = 60; i < name.length; i++, y += 20)
 			g.drawString(name[i], 20, y);
 		
 		g.drawString("Program developed by Arjun Krishna Babu", 20, y + 30);
