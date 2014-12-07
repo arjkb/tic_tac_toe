@@ -99,7 +99,9 @@ class Game extends Frame	{
 	double v_end;	//ending y co-ordinate of vertical line
 	
 	boolean win = false; int ws = 0, we = 0;
-
+	int whowin; //1 indicates human won, 2 indicated computer won
+	WinWindow WW = new WinWindow(this);
+	
 	int lasthit = 0; //keeps track of which square was hit last (numbered as shown below)
 	int [][]A = new int[3][3];
 	
@@ -113,7 +115,13 @@ class Game extends Frame	{
 	
 	public Game()	{
 //		msg = "Hello";
+
+		whowin = 0;
+		
 		setBackground(Color.black);
+		
+		
+		WW.setSize(new Dimension(330, 70));
 		
 		addMouseListener(new MyMouseAdapter(this));
 		addMouseMotionListener(new MyMouseMotionAdapter(this));
@@ -152,14 +160,14 @@ class Game extends Frame	{
 		if( xx == 0 && yy == 0 )	
 			return;
 
-		g.drawOval( xx, yy, ptov(0.23, dim.width), ptov(0.23, dim.height) );
-		g.drawOval( xx+1, yy+1, ptov(0.23, dim.width) - 1, ptov(0.23, dim.height) - 2 );
+		g.drawOval( xx, yy, ptov(0.23, dim.width), ptov(0.20, dim.height) );
+		g.drawOval( xx+1, yy+1, ptov(0.23, dim.width) - 1, ptov(0.20, dim.height) - 2 );
 	}
 
 	public void hit(int xx, int yy)	{	//if a mouse is clicked from a particular square...
 		//xx - x co-ordinate of clicked point
 		//yy - y co-ordinate of clicked point
-
+  
 		
 		if( xx > ptov(0.06, dim.width) && xx < ptov(0.34, dim.width) )	{	//left coloumn
 			if( yy > ptov(0.06,  dim.height) && yy < ptov(0.34, dim.height) )	{
@@ -200,8 +208,8 @@ class Game extends Frame	{
 					A[2][1] = 1;
 				//showStatus("SQUARE EIGHT");
 			}
-
 		}
+		
 		else if( xx > ptov(0.67, dim.width) && xx < ptov(0.92, dim.width) )	{ //right coloumn
 			if( yy > ptov(0.06,  dim.height) && yy < ptov(0.34, dim.height) )	{
 				lasthit = 3;
@@ -607,22 +615,26 @@ class Game extends Frame	{
 	} //end of playOpp()
 	
 	public void winCheck()	{		
+		
 		if(A[0][0] == 1 && A[0][1] == 1 && A[0][2] == 1)	{ // ^ --- 
 			win = true;
 			ws = 1;
 			we = 3;
+			whowin = 1;	
 			repaint();			
 		}
 		else if(A[1][0] == 1 && A[1][1] == 1 && A[1][2] == 1)	{ // ~ --- 
 			win = true;
 			ws = 4;
 			we = 6;
+			whowin = 1;
 			repaint();			
 		}
 		else if(A[2][0] == 1 && A[2][1] == 1 && A[2][2] == 1)	{ // _ --- 
 			win = true;
 			ws = 7;
 			we = 9;
+			whowin = 1;
 			repaint();			
 		}
 		
@@ -630,6 +642,7 @@ class Game extends Frame	{
 			win = true;
 			ws = 1;
 			we = 7;
+			whowin = 1;
 			//showStatus("X WIN");
 			repaint();			
 		}
@@ -637,13 +650,15 @@ class Game extends Frame	{
 			win = true;
 			ws = 2;
 			we = 8;
-			//showStatus("X WIN");
+			whowin = 1;
+			//showStatus("X WIN"); 
 			repaint();			
 		}
 		else if(A[0][2] == 1 && A[1][2] == 1 && A[2][2] == 1)	{	//  | >
 			win = true;
 			ws = 3;
 			we = 9;
+			whowin = 1;
 			//showStatus("X WIN");
 			repaint();			
 		}
@@ -652,6 +667,7 @@ class Game extends Frame	{
 			win = true;
 			ws = 1;
 			we = 9;
+			whowin = 1;
 			//showStatus("X WIN");
 			repaint();			
 		}
@@ -660,6 +676,7 @@ class Game extends Frame	{
 			win = true;
 			ws = 3;
 			we = 7;
+			whowin = 1;
 			//showStatus("X WIN");
 			repaint();			
 		}
@@ -667,6 +684,7 @@ class Game extends Frame	{
 		if(A[0][0] == 2 && A[0][1] == 2 && A[0][2] == 2)	{ // ^ --- 
 			win = true;
 			ws = 1;
+			whowin = 2;
 			we = 3;
 			repaint();			
 		}
@@ -674,12 +692,14 @@ class Game extends Frame	{
 			win = true;
 			ws = 4;
 			we = 6;
+			whowin = 2;
 			repaint();			
 		}
 		else if(A[2][0] == 2 && A[2][1] == 2 && A[2][2] == 2)	{ // _ --- 
 			win = true;
 			ws = 7;
 			we = 9;
+			whowin = 2;
 			repaint();			
 		}
 		
@@ -687,6 +707,7 @@ class Game extends Frame	{
 			win = true;
 			ws = 1;
 			we = 7;
+			whowin = 2;
 			//showStatus("X WIN");
 			repaint();			
 		}
@@ -694,6 +715,7 @@ class Game extends Frame	{
 			win = true;
 			ws = 2;
 			we = 8;
+			whowin = 2;
 			//showStatus("X WIN");
 			repaint();			
 		}
@@ -701,6 +723,7 @@ class Game extends Frame	{
 			win = true;
 			ws = 3;
 			we = 9;
+			whowin = 2;
 			//showStatus("X WIN");
 			repaint();			
 		}
@@ -709,7 +732,7 @@ class Game extends Frame	{
 			win = true;
 			ws = 1;
 			we = 9;
-			//showStatus("X WIN");
+			whowin = 2;
 			repaint();			
 		}
 		
@@ -717,7 +740,7 @@ class Game extends Frame	{
 			win = true;
 			ws = 3;
 			we = 7;
-			//showStatus("X WIN");
+			whowin = 2;
 			repaint();			
 		}
 	}	
@@ -770,7 +793,7 @@ class Game extends Frame	{
 			dx = ptov(0.68, dim.width);
 			dy = ptov(0.09, dim.height);
 			drawX(g, dx, dy);
-		}
+		}		
 		if(A[1][0] == 1)	{
 			dx = ptov(0.09, dim.width);
 			dy = ptov(0.38, dim.height);
@@ -913,6 +936,8 @@ class Game extends Frame	{
 
 			g.drawLine(x1, y1, x2, y2);
 			g.drawLine(x1-1, y1, x2-1, y2);
+			
+			WW.setVisible(true);
 		}	
 //		drawX(g, dx, dy);
 //		drawC(g, dx, dy);
@@ -921,6 +946,23 @@ class Game extends Frame	{
 
 	public void paint(Graphics g)	{
 		update(g);
+	}
+}
+
+class WinWindow	extends Frame	{
+	
+	Game gref;
+	
+	public WinWindow(Game gref)	{
+		this.gref = gref;
+		addWindowListener(new MyWindowAdapter());
+	}
+	
+	public void paint(Graphics g)	{
+		if(gref.whowin == 1)	
+			g.drawString(" YAY! YOU WON!", 30, 50);
+		else if(gref.whowin == 2)	
+			g.drawString(" OOPS! COMPUTER WON!", 30, 50);
 	}
 }
 
@@ -934,12 +976,12 @@ class MyMouseAdapter extends MouseAdapter	{
 	public void mouseClicked(MouseEvent ME)	{
 		//T.showStatus(" CLICK!");
 		T.hit(ME.getX(), ME.getY());
-		
+/*		
 		try {
 			Thread.sleep(250);			
 		}
 		catch (InterruptedException E)	{ }
-		
+*/		
 		T.winCheck();
 		
 		T.playOpp();
@@ -994,7 +1036,7 @@ public class tictac {		//MAIN CLASS
 	
 		int m_choice = 0;
 		
-		MM.setSize(new Dimension(300, 300));
+		MM.setSize(new Dimension(330, 330));
 		MM.setTitle(" Main Menu ");
 		
 		MM.setVisible(true);
@@ -1005,7 +1047,7 @@ public class tictac {		//MAIN CLASS
 		
 		switch( MM.getChoice() )	{
 			case 0:	MM.setVisible(false);
-					T.setSize(new Dimension(330, 330));
+					T.setSize(new Dimension(330, 396));
 					T.setTitle(" TIC TAC TOE ");
 					T.setVisible(true);
 					break;
