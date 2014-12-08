@@ -7,7 +7,6 @@
 	OS		: Ubuntu 14.04 LTS
 	CODER	: Arjun Krishna Babu
 	GIT		: https://github.com/arjunkbabu/tic_tac_toe
-
 */
 
 //import java.applet.*;
@@ -64,16 +63,20 @@ class MainMenu extends Frame	{
 
 	public void paint(Graphics g)	{			
 //		update(g);
+		Dimension d = getSize();
 		g.setColor(Color.blue);
+		g.drawRect(1, 1, d.width - 3, d.height - 3);
 		
 		g.setFont(titleFont);
-		g.drawString(" TIC-TAC-TOE! ", 0, 100);
+		g.drawString(" TIC-TAC-TOE! ", 0, 200);
 		
 		g.setFont(contentFont);
+		g.setColor(Color.orange);
 		g.drawString(" Welcome to the tic-tac-toe open-source project!", 40, 300);
 		g.drawString(" http://github.com/arjunkbabu/tic_tac_toe", 70, 320);
 //		g.drawString(" Before you play: ", 10, 60);
 //		g.drawString(" 1. Click on a square to make a move", 10, 75);
+		g.setColor(Color.green);
 		g.drawString(" Press ENTER to play!", 150, 400);
 	}	
 }
@@ -157,8 +160,8 @@ class Game extends Frame	{
 		if( xx == 0 && yy == 0 )	
 			return;
 
-		g.drawOval( xx, yy, ptov(0.23, dim.width), ptov(0.20, dim.height) );
-		g.drawOval( xx+1, yy+1, ptov(0.23, dim.width) - 1, ptov(0.20, dim.height) - 2 );
+		g.drawOval( xx, yy, ptov(0.23, dim.width), ptov(0.23, dim.height) );
+		g.drawOval( xx+1, yy+1, ptov(0.23, dim.width) - 1, ptov(0.23, dim.height) - 2 );
 	}
 
 	public void hit(int xx, int yy)	{	//if a mouse is clicked from a particular square...
@@ -1127,7 +1130,7 @@ class MyMouseAdapter extends MouseAdapter	{
 		T.winCheck();
 		
 		currentScore = " " + T.scorex + " " + T.scorey; 
-		T.setTitle(currentScore);
+//		T.setTitle(currentScore);
 		T.repaint();
 	}
 }
