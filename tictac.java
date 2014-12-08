@@ -253,7 +253,7 @@ class Game extends Frame	{
 	public void playOpp()	{
 //		A[1][1] = 2; //this is a trial move
 
-		//FORK:
+		//WIN: (if two in a row, play third)
 		if(A[1][1] == 1)	{	//middle-centre
 			if(A[0][1] == 1)	{	//top-centre
 				if(A[2][1] == -1)	{	//bottom-centre
@@ -457,7 +457,7 @@ class Game extends Frame	{
 		}
 		
 		
-		//---END OF FORK--|
+		//---END OF WIN--|
 		
 		//BLOCK:
 		if(A[0][0] == 1)	{	//top-left
@@ -1043,6 +1043,7 @@ class WinWindow	extends Frame implements KeyListener {
 	//	CW.setVisible(true);
 		F = new Font("Courier 10 Pitch", Font.BOLD, 25);
 		
+		setBackground(Color.white);
 		this.gref = gref;
 		setFont(F);
 		addWindowListener(new MyWindowAdapter());
@@ -1063,15 +1064,21 @@ class WinWindow	extends Frame implements KeyListener {
 //		    g.drawString(" SCORECARD! ", 40, 50);
 //		    g.drawString(" ---------- ", 40, 55);
 		    g.setFont(F);
-		if(gref.whowin == 1)	
-			g.drawString(" YAY! YOU WON!", 30, 70);
+		if(gref.whowin == 1)	{
+			g.drawString(" YAY! YOU WON!", 70, 70);
+			g.setFont( new Font("Courier 10 Pitch", Font.BOLD, 50));
+			g.setColor(Color.green);
+			g.drawString("CONGRATS!!", 50, 140);
+		}
 		else if(gref.whowin == 2)	{
-			g.drawString(" OOPS! COMPUTER WON!", 30, 70);
+			g.drawString(" OOPS! COMPUTER WON!", 40, 70);
 			g.setFont( new Font("Courier 10 Pitch", Font.BOLD, 40));
-			g.drawString("GAME OVER!!", 30, 120);
+			g.setColor(Color.red);
+			g.drawString("GAME OVER!!", 60, 120);
 		}
 		g.setFont(new Font("Courier 10 Pitch", Font.BOLD, 15));
-		g.drawString(" Press SPACE to view credits", 20, 250);
+		g.setColor(Color.black);
+		g.drawString(" Press SPACE to view credits", 50, 250);
 	}
 }
 
@@ -1081,11 +1088,13 @@ class CreditWindow extends Frame	{
 	String name[] = {"Ms. Resmi T. R.", 
 					 "Ms. Thushara M. G.",
 					 "Akhil Raj",
+					 "Arjun Sreekumar",
 					 "Athul Justin",
 					 "Franklin Thomas",
 					 "Joyce George",
 					 "Krishna Chandran",
 					 "Lekshmi Venkatraman",
+					 "Naveen Jose",
 					 "Vivek Ravindran",
 					 "Vysakh S"					 
 					};
@@ -1097,12 +1106,15 @@ class CreditWindow extends Frame	{
 	}
 		
 	public void paint(Graphics g)	{
+		g.setFont(new Font("FreeSans", Font.BOLD, 17));
+		g.drawString(" SPECIAL THANKS ", 170, 50);
 		g.setFont(F);
-		g.drawString(" SPECIAL THANKS ", 100, 30);
-		for(i = 0, y = 60; i < name.length; i++, y += 20)
+		for(i = 0, y = 80; i < name.length; i++, y += 20)
 			g.drawString(name[i], 20, y);
 		
-		g.drawString("Program developed by Arjun Krishna Babu", 20, y + 30);
+		g.drawString("Program developed by Arjun Krishna Babu", 120, y + 30);
+		g.drawString("THIS IS AN OPEN-SOURCE PROJECT", 122, y + 60);
+		g.drawString("https://github.com/arjunkbabu/tic_tac_toe", 120, y + 80);
 	}
 	
 }
